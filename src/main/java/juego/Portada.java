@@ -18,7 +18,7 @@ public class Portada extends ElementoBasico {
 	public Portada(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color) {
 		super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
 		try {
-			String path = Paths.get(Messi.class.getClassLoader().getResource("imagenes/portada.png").toURI()).toString();
+			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/portada.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -26,15 +26,15 @@ public class Portada extends ElementoBasico {
 			e.printStackTrace();
 		}
 	}
-	public void dibujarse(Graphics graphics) {
+	public void dibujarse(Graphics g) {
 		try {
-			graphics.drawImage(img, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+			g.drawImage(img, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
 		} catch (Exception e1) {
 			throw new RuntimeException(e1);
 		}
 	}
-	public  void destruirse(Graphics graphics) {
-		graphics.setColor(Color.red);
-		graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
+	public  void destruirse(Graphics g) {
+		g.setColor(Color.red);
+		g.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
 	}
 }

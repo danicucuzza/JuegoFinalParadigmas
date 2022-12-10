@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
-public abstract class ElementoBasico implements ElementoJugador {
+public abstract class ElementoBasico implements Elemento {
 	private double posicionX;
 	private double posicionY;
 	private double velocidadX;
@@ -24,7 +24,7 @@ public abstract class ElementoBasico implements ElementoJugador {
 	}
 	public abstract void dibujarse(Graphics graphics);
 	// devuelve true si hay colision entre este elemento y el elemento que le pasamos como parametro
-	public boolean hayColision(ElementoJugador elemento) {
+	public boolean hayColision(Elemento elemento) {
 		if (this.getPosicionX() < elemento.getPosicionX() + elemento.getAncho() &&
 				this.getPosicionX() + this.getAncho() > elemento.getPosicionX() &&
 				this.getPosicionY() < elemento.getPosicionY() + elemento.getLargo() &&

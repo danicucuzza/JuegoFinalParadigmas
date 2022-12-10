@@ -11,33 +11,17 @@ public class Reloj {
 	private int posicionY;
 	private Font font;
 	private Color color;
-	private int goles;
+	private int tiempo = 100;
 
 	public Reloj(int posicionX, int posicionY, Font font, Color color) {
 		this.posicionX = posicionX;
 		this.posicionY = posicionY;
 		this.font = font;
 		this.color = color;
-		this.goles = 0;
 	}
 	public void dibujarse(Graphics g) {
 		g.setColor(color);
 		g.setFont(font);
-		g.drawString("TIME    " + String.valueOf(goles), posicionX, posicionY);
-	}
-	public void restarPunto() {
-		goles--;
-	}
-
-	public void sumarPunto() {
-		goles=goles+30;
-	}
-
-	public void setPuntaje(int puntaje) {
-		this.goles = puntaje;
-	}
-
-	public int getPuntaje() {
-		return goles;	
+		g.drawString("TIME: " + String.valueOf(tiempo), posicionX = 400, posicionY = 25);
 	}
 }
