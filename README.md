@@ -1,1 +1,1 @@
-# JuegoFinalParadigmas
+# juegoFinalParadigmas
