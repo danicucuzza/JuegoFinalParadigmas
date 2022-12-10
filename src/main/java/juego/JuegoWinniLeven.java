@@ -113,7 +113,21 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
             pantallaActual = PANTALLA_INICIO;
         }
     }
-
+	public void enemigoBuscaPelota() {
+		double azar = Math.random();
+		if( azar < 0.60) {
+			if(neymor.getPosicionX() < pelota.getPosicionX()) {
+				neymor.setVelocidadX(+1);
+			}
+			if(neymor.getPosicionX() > pelota.getPosicionX()) {
+				neymor.setVelocidadX(-1);
+			}
+		}
+		else if (azar > 0.90) {
+			neymor.setVelocidadX(0);
+		}
+	}
+	
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		
@@ -197,6 +211,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		pelota.moverse();
 		messa.moverse();
 		neymor.moverse();
+		enemigoBuscaPelota();
 	}
 	private void dibujarJuego() {
 		this.repaint();
@@ -266,7 +281,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         if (messa.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
-            pelota.setVelocidadY(pelota.getVelocidadY()-2);
+            pelota.setVelocidadY(pelota.getVelocidadY()-1);
         }
     }
 	
@@ -274,7 +289,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		if (neymor.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
-            pelota.setVelocidadY(pelota.getVelocidadY()+2);
+            pelota.setVelocidadY(pelota.getVelocidadY()+1);
         }
     }
 	

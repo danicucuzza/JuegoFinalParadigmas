@@ -9,5 +9,4 @@ public abstract class Enemigo extends ElementoBasico {
             Color color) {
         super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
     }
-
 }

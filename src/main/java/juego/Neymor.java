@@ -34,4 +34,5 @@ public class Neymor extends Enemigo {
 				throw new RuntimeException(e1);
 			}
 		}
+		
 }
