@@ -266,6 +266,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         if (messa.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
+            pelota.setVelocidadY(pelota.getVelocidadY()-2);
         }
     }
 	
@@ -273,6 +274,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		if (neymor.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
+            pelota.setVelocidadY(pelota.getVelocidadY()+2);
         }
     }
 	
