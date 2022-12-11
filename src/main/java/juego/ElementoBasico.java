@@ -22,7 +22,7 @@ public abstract class ElementoBasico implements Elemento {
 		this.largo = largo;
 		this.color = color;
 	}
-	public abstract void dibujarse(Graphics graphics);
+	public abstract void dibujarse(Graphics g);
 	// devuelve true si hay colision entre este elemento y el elemento que le pasamos como parametro
 	public boolean hayColision(Elemento elemento) {
 		if (this.getPosicionX() < elemento.getPosicionX() + elemento.getAncho() &&

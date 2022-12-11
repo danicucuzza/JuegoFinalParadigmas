@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
-// Implementacion de la paleta
+// Implementacion de la cancha
 public class Cancha extends ElementoBasico {
 	private BufferedImage img;
 
@@ -25,15 +25,15 @@ public class Cancha extends ElementoBasico {
 			e.printStackTrace();
 		}
 	}
-	public void dibujarse(Graphics graphics) {
+	public void dibujarse(Graphics g) {
 		try {
-			graphics.drawImage(img, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
+			g.drawImage(img, getPosicionX(), getPosicionY(), this.getAncho(), this.getLargo(), null);
 		} catch (Exception e1) {
 			throw new RuntimeException(e1);
 		}
 	}
-	public  void destruirse(Graphics graphics) {
-		graphics.setColor(Color.red);
-		graphics.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
+	public  void destruirse(Graphics g) {
+		g.setColor(Color.red);
+		g.fillOval(getPosicionX(), getPosicionY(), getAncho(), getLargo());
 	}
 }
