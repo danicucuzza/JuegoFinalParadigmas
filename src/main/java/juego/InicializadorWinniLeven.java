@@ -9,17 +9,19 @@ public class InicializadorWinniLeven {
 	public static void main(String[] args) {
 		
 		// Propiedades del Juego
-		int anchoVentana = 600;
-		int largoVentana = 640;
+		int anchoVentana = 650;
+		int largoVentana = 720;
 		int tiempoDeEsperaEntreActualizaciones = 5;
 		int golesAFavor = 0;
 		int golesEnContra = 0;
+		int enemigosPorLinea = 7;
+        int filasDeEnemigos = 5;
 
 		// Activar aceleracion de graficos en 2 dimensiones
 		System.setProperty("sun.java2d.opengl", "true");
 
 		// Crear un objeto de tipo JFrame que es la ventana donde va estar el juego
-		JFrame ventana = new JFrame("WINNI LEVEN 2.0 ARGENTINO");
+		JFrame ventana = new JFrame("WINNI LEVEN MESSA VS ROLANDO");
 
 		// Cerrar la aplicacion cuando el usuario hace click en la 'X'
 		ventana.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -31,7 +33,8 @@ public class InicializadorWinniLeven {
 		ventana.setVisible(true);
 		
         // Crear un "Jpanel" llamado Juego y agregarlo a la ventana
-        JuegoWinniLeven juegoWinniLeven = new JuegoWinniLeven(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones);
+        JuegoWinniLeven juegoWinniLeven = new JuegoWinniLeven(anchoVentana, largoVentana, tiempoDeEsperaEntreActualizaciones, enemigosPorLinea,
+                filasDeEnemigos);
         
      // Agregar a la ventana el JComponent (Juego hereda de JComponent)
         ventana.add(juegoWinniLeven);

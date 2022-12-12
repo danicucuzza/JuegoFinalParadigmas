@@ -1,4 +1,23 @@
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\ElementoBasico.java
+<<<<<<< HEAD
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\GolesRolando.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\JuegoWinniLeven.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Messa.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Portada.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\ArqueroLocal.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\InicializadorWinniLeven.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Elemento.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\GolesMessa.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Cancha.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\PantallaPerdedor.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Sonidos.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Dibujable.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\PantallaImagen.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Reloj.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Pelota.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\ArqueroVisitante.java
+C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Rolando.java
+=======
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\JuegoWinniLeven.java
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Messa.java
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Portada.java
@@ -18,5 +37,6 @@ C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\j
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\JugadorContrario.java
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\alejoBecar.java
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Inicio.java
+>>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Arco.java
 C:\Users\ochenta y seis\juegoFinalParadigmasAdri\juegoFinalParadigmas\src\main\java\juego\Enemigo.java

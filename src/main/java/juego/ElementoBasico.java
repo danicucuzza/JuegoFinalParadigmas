@@ -70,6 +70,14 @@ public abstract class ElementoBasico implements Elemento {
 	public int getPosicionY() {
 		return (int) posicionY;
 	}
+	
+	public int moverPosicionX() {
+		return (int) (posicionX+100);
+	}
+	
+	public int moverPosicionY() {
+		return (int) (posicionY+100);
+	}
 
 	public void setPosicionX(int posicionX) {
 		this.posicionX = posicionX;

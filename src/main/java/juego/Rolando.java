@@ -10,15 +10,15 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 // Implementacion del jugador2
-public class Neymor extends Enemigo {
+public class Rolando extends ElementoBasico {
 	
 		private BufferedImage img;
 
-		public Neymor (int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color)  {
+		public Rolando (int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color)  {
 			super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
 	
 			try {
-				String path = Paths.get(Neymor.class.getClassLoader().getResource("imagenes/jugador2.png").toURI()).toString();
+				String path = Paths.get(Rolando.class.getClassLoader().getResource("imagenes/rolando.png").toURI()).toString();
 				this.img = ImageIO.read(new File(path));
 			} catch (IOException e) {
 				throw new RuntimeException(e);

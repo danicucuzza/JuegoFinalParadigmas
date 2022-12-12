@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
-public class GolesNeymor {
+public class GolesRolando {
 	// Clase para mostrar la cantidad de goles en contra.
 
 	    private int posicionX;
@@ -13,7 +13,7 @@ public class GolesNeymor {
 	    private Color color;
 	    private int golesEnContra = 0;
 
-	    public GolesNeymor(int posicionX, int posicionY, Font font, Color color, int golesEnContra) {
+	    public GolesRolando(int posicionX, int posicionY, Font font, Color color, int golesEnContra) {
 	        this.posicionX = posicionX;
 	        this.posicionY = posicionY;
 	        this.font = font;
@@ -24,7 +24,7 @@ public class GolesNeymor {
 	    public void dibujarse(Graphics g) {
 	        g.setColor(color);
 	        g.setFont(font);
-	        g.drawString("BRASIL: " + String.valueOf(golesEnContra), posicionX = 25, posicionY = 25);
+	        g.drawString("PORTUGAL: " + String.valueOf(golesEnContra), posicionX = 25, posicionY = 25);
 	    }
 
 	    public void golEnContra() {

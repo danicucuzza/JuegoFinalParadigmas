@@ -18,7 +18,7 @@ public class Portada extends ElementoBasico {
 	public Portada(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color) {
 		super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
 		try {
-			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/portada.png").toURI()).toString();
+			String path = Paths.get(Portada.class.getClassLoader().getResource("imagenes/portada.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);

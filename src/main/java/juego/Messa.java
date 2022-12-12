@@ -18,7 +18,7 @@ public class Messa extends ElementoBasico {
 
 
 		try {
-			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/jugador.png").toURI()).toString();
+			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/messa.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
