@@ -9,7 +9,7 @@ public class InicializadorWinniLeven {
 	public static void main(String[] args) {
 		
 		// Propiedades del Juego
-		int anchoVentana = 650;
+		int anchoVentana = 1080;
 		int largoVentana = 720;
 		int tiempoDeEsperaEntreActualizaciones = 5;
 		int golesAFavor = 0;

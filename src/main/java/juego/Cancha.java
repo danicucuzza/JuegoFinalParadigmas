@@ -17,7 +17,7 @@ public class Cancha extends ElementoBasico {
 	public Cancha(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color) {
 		super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
 		try {
-			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/fondo3.png").toURI()).toString();
+			String path = Paths.get(Messa.class.getClassLoader().getResource("imagenes/canchaNueva2.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);

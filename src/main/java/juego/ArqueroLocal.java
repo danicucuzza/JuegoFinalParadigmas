@@ -18,7 +18,7 @@ public class ArqueroLocal extends ElementoBasico {
 
 
 		try {
-			String path = Paths.get(ArqueroLocal.class.getClassLoader().getResource("imagenes/dibu.png").toURI()).toString();
+			String path = Paths.get(ArqueroLocal.class.getClassLoader().getResource("imagenes/cono.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);

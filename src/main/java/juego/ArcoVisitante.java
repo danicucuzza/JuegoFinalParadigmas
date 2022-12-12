@@ -10,15 +10,15 @@ import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 // Implementacion del jugador1
-public class Arco extends ElementoBasico {
+public class ArcoVisitante extends ElementoBasico {
 	private BufferedImage img;
 
-	public Arco(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color)  {
+	public ArcoVisitante(int posicionX, int posicionY, double velocidadX, double velocidadY, int ancho, int largo, Color color)  {
 		super(posicionX, posicionY, velocidadX, velocidadY, ancho, largo, color);
 
 
 		try {
-			String path = Paths.get(Arco.class.getClassLoader().getResource("imagenes/arco.png").toURI()).toString();
+			String path = Paths.get(ArcoVisitante.class.getClassLoader().getResource("imagenes/arcoVisitante.png").toURI()).toString();
 			this.img = ImageIO.read(new File(path));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
