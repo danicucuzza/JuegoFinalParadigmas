@@ -30,11 +30,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	private int tiempoDeEsperaEntreActualizaciones;
 	private ElementoBasico pelota;
 	private ElementoBasico messa;
-<<<<<<< HEAD
 	private ElementoBasico rolando;
-=======
-	private ElementoBasico neymor;
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
 	private ElementoBasico dabiMartino;
 	private ElementoBasico alejoBecar;
 	private ElementoBasico cancha;
@@ -50,6 +46,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
     private PantallaImagen pantallaEsperar;
     private PantallaImagen pantallaPerdedor;
     private boolean dominarPelota = true;
+    private boolean buscaArco = true;
 
 	public JuegoWinniLeven(int anchoJuego, int largoJuego, int tiempoDeEsperaEntreActualizaciones, int enemigosPorLinea, int filasDeEnemigos) {
 		this.pantallaActual = PANTALLA_INICIO;
@@ -58,21 +55,12 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		this.pelota = createPelota();
 		this.cancha = new Cancha(0,0, 0, 0, 650, 720, Color.green);
 		this.reloj = new Reloj(25 ,630,new Font("Impact",8,20), Color.black);
-<<<<<<< HEAD
 		this.messa = new Messa(280, 560, 0, 0, 70, 70, Color.blue);
 		this.rolando = new Rolando(280, 25, 0, 0, 50, 60, Color.yellow);
-		this.dabiMartino = new ArqueroLocal(290, 580, 0, 0, 30, 30, Color.blue);
+		this.dabiMartino = new ArqueroLocal(270, 580, 0, 0, 30, 30, Color.blue);
 		this.alejoBecar = new ArqueroVisitante(270, 20, 0, 0, 30, 30, Color.yellow);
-		this.arcoLocal = new Arco (250, 680, 0, 0, 150, 70, Color.black);
-		this.arcoVisitante = new Arco (250, -40, 0, 0, 150, 70, Color.black);
-=======
-		this.messa = new Messa(280, 580, 0, 0, 40, 40, Color.blue);
-		this.neymor = new Neymor(280, 25, 0, 0, 40, 40, Color.yellow);
-		this.dabiMartino = new dabiMartino(280, 580, 0, 0, 30, 30, Color.blue);
-		this.alejoBecar = new alejoBecar(280, 25, 0, 0, 30, 30, Color.yellow);
-		this.arcoLocal = new Arco (265, 610, 0, 0, 70, 30, Color.black);
-		this.arcoVisitante = new Arco (265, -6, 0, 0, 70, 30, Color.black);
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
+		this.arcoLocal = new Arco (250, 685, 0, 0, 150, 70, Color.black);
+		this.arcoVisitante = new Arco (250, -35, 0, 0, 150, 70, Color.black);
 		this.golesMessa = new GolesMessa(25 ,630, new Font("Impact", 8, 20), Color.black, 0);
 		this.golesRolando = new GolesRolando(630, 25, new Font("Impact", 8, 20), Color.black, 0);
 //		this.nombreJuegoWinniLeven = new NombreJuegoWinniLeven(200,30, new Font("Impact", 8, 30), Color.green, 3);
@@ -102,7 +90,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         while (true) {
             if (pantallaActual == PANTALLA_JUEGO) {
                 actualizarJuego();
-                sonidos.tocarSonido("sonidos/cancha.wav");
             }
             dibujarJuego();
             esperar(tiempoDeEsperaEntreActualizaciones);
@@ -134,7 +121,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         }
         if (pantallaActual == PANTALLA_JUEGO) {
         	if (arg0.getKeyCode() == KeyEvent.VK_D) {
-<<<<<<< HEAD
                 messa.setVelocidadX(2);
             }
     		if (arg0.getKeyCode() == KeyEvent.VK_A) {
@@ -148,28 +134,25 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
             } //patear pelota sobre eje Y jugador 1
     		if (arg0.getKeyCode() == KeyEvent.VK_J) {
     			dominarPelota = false;
-    			pelota.rebotarEnEjeY();
-    			pelota.setVelocidadX(+1);
-    			pelota.rebotarEnEjeX();
-    			pelota.setVelocidadY(-7);
-    			}
+    			pelotaBuscaArco();
     		} 
         }
-=======
-                messa.setVelocidadX(1);
-            }
-    		if (arg0.getKeyCode() == KeyEvent.VK_A) {
-                messa.setVelocidadX(-1);
-            }
-    		if (arg0.getKeyCode() == KeyEvent.VK_S) {
-                messa.setVelocidadY(1);
-            }
-    		if (arg0.getKeyCode() == KeyEvent.VK_W) {
-                messa.setVelocidadY(-1);
-            }
-        }
     }
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
+	
+	public void pelotaBuscaArco() {
+		if(pelota.getPosicionX() < arcoVisitante.getPosicionX()) {
+			pelota.setVelocidadX(+2);
+		} 
+		if(pelota.getPosicionX() > arcoVisitante.getPosicionX()) {
+			pelota.setVelocidadX(-2);
+		}
+		if (pelota.getPosicionY() < arcoVisitante.getPosicionY()) {
+			pelota.setVelocidadY(+5);
+		}
+		if (pelota.getPosicionY() > arcoVisitante.getPosicionY()) {
+			pelota.setVelocidadY(-5);
+		}
+	}
 	
 	@Override
 	public void keyReleased(KeyEvent arg0) {
@@ -205,10 +188,12 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 
 	}
 	
+	public void enemigoDispara() { 
+	}
+	
 	public void enemigoBuscaPelota() {
 		double azar = Math.random();
 		if( azar < 0.60) {
-<<<<<<< HEAD
 			if(rolando.getPosicionX() < pelota.getPosicionX()) {
 				rolando.setVelocidadX(+1);
 			}
@@ -220,34 +205,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			}
 			if(rolando.getPosicionY() > pelota.getPosicionY()) {
 				rolando.setVelocidadY(-1);
-			}
-			if(dabiMartino.getPosicionX() < pelota.getPosicionX()) {
-				dabiMartino.setVelocidadX(+0.5);
-			}
-			if(dabiMartino.getPosicionX() > pelota.getPosicionX()) {
-				dabiMartino.setVelocidadX(-0.5);
-			}
-			if(alejoBecar.getPosicionX() < pelota.getPosicionX()) {
-				alejoBecar.setVelocidadX(+0.5);
-			}
-			if(alejoBecar.getPosicionX() > pelota.getPosicionX()) {
-				alejoBecar.setVelocidadX(-0.5);
-			}
-		}
-		else if (azar > 0.90) {
-			rolando.setVelocidadX(0);
-=======
-			if(neymor.getPosicionX() < pelota.getPosicionX()) {
-				neymor.setVelocidadX(+0.5);
-			}
-			if(neymor.getPosicionX() > pelota.getPosicionX()) {
-				neymor.setVelocidadX(-0.5);
-			}
-			if(neymor.getPosicionY() < pelota.getPosicionY()) {
-				neymor.setVelocidadY(+1);
-			}
-			if(neymor.getPosicionY() > pelota.getPosicionY()) {
-				neymor.setVelocidadY(-1);
 			}
 			if(dabiMartino.getPosicionX() < pelota.getPosicionX()) {
 				dabiMartino.setVelocidadX(+1);
@@ -263,13 +220,12 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			}
 		}
 		else if (azar > 0.90) {
-			neymor.setVelocidadX(0);
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
+			rolando.setVelocidadX(0);
 			dabiMartino.setVelocidadX(0);
 			alejoBecar.setVelocidadX(0);
 		}
 	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		
@@ -290,11 +246,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         	cancha.dibujarse(g);
         	pelota.dibujarse(g);
             messa.dibujarse(g);
-<<<<<<< HEAD
             rolando.dibujarse(g);
-=======
-            neymor.dibujarse(g);
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
             dabiMartino.dibujarse(g);
             alejoBecar.dibujarse(g);
             arcoLocal.dibujarse(g);
@@ -314,11 +266,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		verificarEstadoAmbiente();
 		pelota.moverse();
 		messa.moverse();
-<<<<<<< HEAD
 		rolando.moverse();
-=======
-		neymor.moverse();
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
 		dabiMartino.moverse();
 		alejoBecar.moverse();
 		enemigoBuscaPelota();
@@ -327,7 +275,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		this.repaint();
 	}
 	
-<<<<<<< HEAD
 	//metodo para crear la pelota
 	private ElementoBasico createPelota() {
 		return new Pelota(anchoJuego / 2, largoJuego / 2, 0, 0, 30, 30, Color.white);
@@ -338,15 +285,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		pelota.setPosicionX(messa.getPosicionX());
 		pelota.setPosicionY(messa.getPosicionY());
 	}
-=======
-	private ElementoBasico createPelotaLocal() {
-        return new Pelota(anchoJuego / 2, 500, 1, -1, 15, 15, Color.white);
-    }
-	
-	private ElementoBasico createPelotaVisitante() {
-        return new Pelota(anchoJuego / 2, 50, -1, 1, 15, 15, Color.white);
-    }
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
 	
 	//metodo para que la pelota siga al jugador 2
 	private void seguirJugadorRolando() {
@@ -354,13 +292,32 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		pelota.setPosicionY(rolando.getPosicionY());
 	}
 	
+	private void buscaArco() {
+		if(rolando.getPosicionX() < arcoLocal.getPosicionX()) {
+			rolando.setVelocidadX(+1);
+			}
+		if(rolando.getPosicionX() > arcoLocal.getPosicionX()) {
+			rolando.setVelocidadX(-1);
+			}
+		if(rolando.getPosicionY() < arcoLocal.getPosicionY()) {
+			rolando.setVelocidadY(+1);
+			}
+		if(rolando.getPosicionY() > arcoLocal.getPosicionY()) {
+			rolando.setVelocidadY(-1);
+		}
+	}
+	
+	
 	//metodo para utilizar los seguimientos de pelota
 	private void dominioDeBalon() {
 		if (pelota.hayColision(messa) && dominarPelota == true) {
 			seguirJugadorMessa();
+			buscaArco = false;
 		}
 		if (pelota.hayColision(rolando) && dominarPelota == true)
 			seguirJugadorRolando();
+			buscaArco();
+			buscaArco = true;
 	}
 
 	// En este metodo verifico las colisiones, los rebotes de la pelota contra las paredes, la colision entre enemigos y el fin de juego
@@ -375,7 +332,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	
 	//verificar rebotes contra las paredes
 	private void verificarRebotePelotaContraParedLateral() {
-        if (pelota.getPosicionX() <= 0 || pelota.getPosicionX() + pelota.getAncho() >= anchoJuego) {
+        if (pelota.getPosicionX() <= 30 || pelota.getPosicionX() + pelota.getAncho() >= (anchoJuego - 50)) {
             pelota.rebotarEnEjeX();
             dominarPelota = true;
             sonidos.tocarSonido("toc");
@@ -388,105 +345,60 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         	rolando.rebotarEnEjeX();
             sonidos.tocarSonido("toc");
         }
-        if (messa.getPosicionX() <= 0 || messa.getPosicionX() + messa.getAncho() >= anchoJuego) {
-        	messa.rebotarEnEjeX();
-            sonidos.tocarSonido("toc");
-        }
-        if (neymor.getPosicionX() <= 0 || neymor.getPosicionX() + neymor.getAncho() >= anchoJuego) {
-        	neymor.rebotarEnEjeX();
-            sonidos.tocarSonido("toc");
-        }
     }
 	
-<<<<<<< HEAD
 	//verifica rebote contra los fondos
 	private void verificarReboteContraFondos() {
-        if (pelota.getPosicionY() <= 0 || pelota.getPosicionY() + pelota.getLargo() >= largoJuego) {
+        if (pelota.getPosicionY() <= 30 || pelota.getPosicionY() + pelota.getLargo() >= (largoJuego - 30)) {
             pelota.rebotarEnEjeY();
             dominarPelota = true;
-=======
-	private void verificarReboteContraFondos() {
-        if (pelota.getPosicionY() <= 0 || pelota.getPosicionY() + pelota.getLargo() >= largoJuego) {
-            pelota.rebotarEnEjeY();
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
             sonidos.tocarSonido("toc");
         }
         if (messa.getPosicionY() <= 0 || messa.getPosicionY() + messa.getLargo() >= largoJuego) {
         	messa.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
         }
-<<<<<<< HEAD
         if (rolando.getPosicionY() <= 0 || rolando.getPosicionY() + rolando.getLargo() >= largoJuego) {
         	rolando.rebotarEnEjeY();
-=======
-        if (neymor.getPosicionY() <= 0 || neymor.getPosicionY() + neymor.getLargo() >= largoJuego) {
-        	neymor.rebotarEnEjeY();
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
             sonidos.tocarSonido("toc");
         }
     }
 	
-<<<<<<< HEAD
 	//metodo para setear las posiciones
 	private void setPosiciones () {
-		messa.setPosicionY(560);
-		messa.setPosicionX(280);
-		rolando.setPosicionX(280);
-		rolando.setPosicionY(25);
-		dabiMartino.setPosicionX(580);
-		dabiMartino.setPosicionX(280);
-		alejoBecar.setPosicionX(280);
-		alejoBecar.setPosicionY(25);
+			messa.setPosicionY(560);
+			messa.setPosicionX(280);
+			rolando.setPosicionX(280);
+			rolando.setPosicionY(25);
+			dabiMartino.setPosicionX(580);
+			dabiMartino.setPosicionX(280);
+			alejoBecar.setPosicionX(280);
+			alejoBecar.setPosicionY(25);
 	}
 	
 	//metodo para verificar los goles
 	private void verificarGoles() {
-		if (pelota.hayColision(arcoLocal)) {
-			golesRolando.golEnContra();
-			esperar(2000);
-			sonidos.tocarSonido("toc");
-			pantallaEsperar.dibujarse(this.getGraphics());
-			pelota = createPelota();
-			setPosiciones();
-			dominarPelota = true;
-=======
-	private void verificarGoles() {
-		if (pelota.hayColision(arcoLocal)) {
-			golesNeymor.golEnContra();
-			esperar(2000);
-			sonidos.tocarSonido("toc");
-			pantallaEsperar.dibujarse(this.getGraphics());
-			pelota = createPelotaLocal();
-			messa.setPosicionX(580);
-			messa.setPosicionX(280);
-			neymor.setPosicionX(280);
-			neymor.setPosicionY(25);
-			dabiMartino.setPosicionX(580);
-			dabiMartino.setPosicionX(280);
-			alejoBecar.setPosicionX(280);
-			alejoBecar.setPosicionY(25);
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
-		} 
-		if (pelota.hayColision(arcoVisitante)) {
-			golesMessa.golAFavor();
-			esperar(2000);
-			sonidos.tocarSonido("toc");
-			pantallaEsperar.dibujarse(this.getGraphics());
-<<<<<<< HEAD
-			pelota = createPelota();
-			setPosiciones();
-			dominarPelota = true;
-=======
-			pelota = createPelotaLocal();
-			messa.setPosicionY(580);
-			messa.setPosicionX(280);
-			neymor.setPosicionX(280);
-			neymor.setPosicionY(25);
-			dabiMartino.setPosicionX(580);
-			dabiMartino.setPosicionX(280);
-			alejoBecar.setPosicionX(280);
-			alejoBecar.setPosicionY(25);
->>>>>>> 44382b5aa00ac268ac737ba0e23d799dcc102b5c
+		if ((pelota.getPosicionX() > 240) && (pelota.getPosicionX() < 380)) {
+			if (pelota.hayColision(arcoLocal)) {
+				if ((pelota.getPosicionX() > 240) && (pelota.getPosicionX() < 380)) {
+					golesRolando.golEnContra();
+					esperar(2000);
+					sonidos.tocarSonido("toc");
+					pantallaEsperar.dibujarse(this.getGraphics());
+					pelota = createPelota();
+					setPosiciones();
+					dominarPelota = true;
+					}
+				} 
+			if (pelota.hayColision(arcoVisitante)) {
+				golesMessa.golAFavor();
+				esperar(2000);
+				sonidos.tocarSonido("toc");
+				pantallaEsperar.dibujarse(this.getGraphics());
+				pelota = createPelota();
+				setPosiciones();
+				dominarPelota = true;
+			}
 		}
 	}
 	
@@ -501,12 +413,6 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
         }
         if (dabiMartino.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
-            pelota.rebotarEnEjeX();
-            sonidos.tocarSonido("toc");
-            pelota.setVelocidadY(pelota.getVelocidadY()-0.1);
-        }
-        if (dabiMartino.hayColision(pelota)) {
-            pelota.rebotarEnEjeY();
             sonidos.tocarSonido("toc");
         }
     }
@@ -514,17 +420,21 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	//metodo para verificar rebotes de pelota contra jugador 2
 	private void verificarReboteEntrePelotaYRolando() {
 		if (rolando.hayColision(pelota)) {
-			pelota.setVelocidadY(-5);
-			pelota.rebotarEnEjeX();
+			dominioDeBalon();
+//			pelota.setVelocidadY(-5);
+//			pelota.rebotarEnEjeX();
             sonidos.tocarSonido("toc");
-            pelota.setVelocidadY(pelota.getVelocidadY()+5);
+//            pelota.setVelocidadY(pelota.getVelocidadY()+5);
             dominarPelota = true;
-        }
-		if (alejoBecar.hayColision(pelota)) {
-            pelota.rebotarEnEjeY();
-            pelota.rebotarEnEjeX();
-            sonidos.tocarSonido("toc");
-            pelota.setVelocidadY(pelota.getVelocidadY()+0.1);
+            double azar = Math.random();
+    		if(azar < 0.15) {
+    			dominarPelota = false;
+    			pelota.rebotarEnEjeY();
+    			pelota.setVelocidadY(+7);
+    			pelota.rebotarEnEjeX();
+    			pelota.setVelocidadX(-1);
+    			
+    		}
         }
 		if (alejoBecar.hayColision(pelota)) {
             pelota.rebotarEnEjeY();
