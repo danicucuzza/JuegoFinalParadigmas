@@ -47,6 +47,11 @@ public abstract class ElementoBasico implements Elemento {
 		velocidadY = -velocidadY;
 	}
 
+	public void rebotar() {
+		velocidadX = -velocidadX;
+		velocidadY = -velocidadY;
+	}
+
 	public double getVelocidadX() {
 		return velocidadX;
 	}
@@ -86,6 +91,7 @@ public abstract class ElementoBasico implements Elemento {
 	public void setPosicionY(int posicionY) {
 		this.posicionY = posicionY;
 	}
+	
 
 	public int getAncho() {
 		return ancho;
