@@ -168,24 +168,25 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			if(rolando.getPosicionY() > pelota.getPosicionY()) {
 				rolando.setVelocidadY(-0.5);
 			}
-			if(dabiMartino.getPosicionY() < pelota.getPosicionY()) {
-				dabiMartino.setVelocidadY(+0.5);
-			}
-			if(dabiMartino.getPosicionY() > pelota.getPosicionY()) {
-				dabiMartino.setVelocidadY(-0.5);
-			}
-			if(alejoBecar.getPosicionY() < pelota.getPosicionY()) {
-				alejoBecar.setVelocidadY(+0.5);
-			}
-			if(alejoBecar.getPosicionY() > pelota.getPosicionY()) {
-				alejoBecar.setVelocidadY(-0.5);
-			}
+
 		}
 		else if (azar > 0.90) {
 			rolando.setVelocidadX(0);
 		}
 	}
-	
+	public void arquerosBuscanPelota(ElementoBasico arquero) {
+		if(arquero.getPosicionY() < pelota.getPosicionY() && arquero.getPosicionY() < 400) {
+			arquero.setVelocidadY(+0.5);
+		}
+		else if(arquero.getPosicionY() > pelota.getPosicionY()  && arquero.getPosicionY() > 200) {
+			arquero.setVelocidadY(-0.5);
+		}
+		else {
+			arquero.setVelocidadY(0);
+		}
+			
+		
+	}
 	//metodo para que la pelota vaya al arco visitante
 	public void pelotaBuscaArcoVisitante() {
 		if(pelota.getPosicionX() > arcoLocal.getPosicionX()) {
@@ -251,7 +252,8 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		rolando.moverse();
 		dabiMartino.moverse();
 		alejoBecar.moverse();
-		enemigoBuscaPelota();
+		arquerosBuscanPelota(dabiMartino);
+		arquerosBuscanPelota(alejoBecar);
 	}
 	private void dibujarJuego() {
 		this.repaint();
