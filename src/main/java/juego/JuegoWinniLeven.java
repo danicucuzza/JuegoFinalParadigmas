@@ -241,6 +241,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	            golesMessa.dibujarse(g);
 	            golesRolando.dibujarse(g);
 	            reloj.dibujarse(g); 
+	            reloj.startTimer(100);
 	        }
 	    }
 		
