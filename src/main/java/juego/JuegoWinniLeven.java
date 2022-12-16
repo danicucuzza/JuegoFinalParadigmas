@@ -60,7 +60,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		this.arcoVisitante = new ArcoVisitante (994, 274, 0, 0, 80, 170, Color.black);
 		this.golesMessa = new GolesMessa(25 ,630, new Font("Impact", 8, 20), Color.black, 0);
 		this.golesRolando = new GolesRolando(630, 25, new Font("Impact", 8, 20), Color.black, 0);
-		this.nameWinniLeven = new NameWinniLeven(600,25, new Font("Impact", 8, 30), Color.green, 3);
+		this.nameWinniLeven = new NameWinniLeven(600,25, new Font("Impact", 8, 30), Color.black, 3);
         this.portada = new PantallaImagen(anchoJuego, largoJuego, "imagenes/portada.png");
         this.pantallaGanador = new PantallaImagen(anchoJuego, largoJuego, "imagenes/ganaste2.png");
         this.pantallaGolMessa = new PantallaImagen(anchoJuego, largoJuego, "imagenes/golMessi2.jpg");
@@ -112,6 +112,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			sonidos.agregarSonido("siu", "sonidos/siu.wav");
 			sonidos.agregarSonido("empate", "sonidos/empate2.wav");
 			sonidos.agregarSonido("muchachos", "sonidos/muchachos.wav");
+			sonidos.agregarSonido("final", "sonidos/final.wav");
 		} catch (Exception e1) {
 			throw new RuntimeException(e1);
 		}
@@ -126,7 +127,8 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		}
 
 		if (pantallaActual == PANTALLA_PERDEDOR || pantallaActual == PANTALLA_GANADOR || pantallaActual == PANTALLA_EMPATE) {
-			esperar(3000);
+			setPosiciones();
+			esperar(4000);
 			pantallaActual = PANTALLA_INICIO;
 		}
 		if (pantallaActual == PANTALLA_JUEGO) {
@@ -171,13 +173,11 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 
 	// metodo para que el enemigo busque la pelota cuando no la tenga.
 	public void enemigoBuscaPelota() {
-		double azar = Math.random();
-		if (azar < 0.30) {
 			if (rolando.getPosicionX() < pelota.getPosicionX()) {
 				rolando.setVelocidadX(+0.5);
 			}
 			if (rolando.getPosicionX() > pelota.getPosicionX()) {
-				if (rolando.getPosicionX() > 300) {
+				if (rolando.getPosicionX() > 400) {
 					rolando.setVelocidadX(-0.5);
 				}
 				if (rolando.getPosicionX() > 500) {
@@ -193,23 +193,24 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			if (rolando.getPosicionX() > 500) {
 				rolando.setVelocidadY(rolando.getVelocidadY()*2.0);
 			}
-		} else if (azar > 0.90) {
-			rolando.setVelocidadX(0);
+			if (rolando.getPosicionX() < 300) {
+				rolando.setVelocidadX(rolando.getVelocidadX()+2);
+			}
 		}
-	}
+	
 
 	// metodo para que los arqueros busquen la pelota en el rango de las posiciones
 	// Y
 	public void arquerosBuscanPelota(ElementoBasico arquero) {
 		if (arquero.getPosicionY() < pelota.getPosicionY() && arquero.getPosicionY() < 430) {
-			arquero.setVelocidadY(+2);
+			arquero.setVelocidadY(+1.3);
 			if (pelota.getPosicionX() < 400) {
-				arquero.setVelocidadY(+7);
+				arquero.setVelocidadY(+2.1);
 			}
 		} else if (arquero.getPosicionY() > pelota.getPosicionY() && arquero.getPosicionY() > 250) {
-			arquero.setVelocidadY(-2);
+			arquero.setVelocidadY(-1.3);
 			if (pelota.getPosicionX() > 700) {
-				arquero.setVelocidadY(-7);
+				arquero.setVelocidadY(-2.1);
 			}
 		} else {
 			arquero.setVelocidadY(0);
@@ -229,17 +230,19 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		}
 		if (messa.getVelocidadY() == 1 && pelota.getPosicionX() >= 500) {
 			pelota.setVelocidadY(+3);
-			if (messa.getPosicionX() < 400) {
-				pelota.setVelocidadX(pelota.getVelocidadX() * 2);
-			}
+		}
+		if (pelota.getPosicionX() <= 400 && pelota.getPosicionY() <= 270) {
+			pelota.setVelocidadX(pelota.getVelocidadX()+3);
+			pelota.setVelocidadY(pelota.getVelocidadY()+ 1);
 		}
 		if (messa.getVelocidadY() == -1 && pelota.getPosicionX() >= 500) {
 			pelota.setVelocidadY(-3);
-			if (messa.getPosicionX() < 400) {
-				pelota.setVelocidadX(pelota.getVelocidadX() * 2);
-			}
+		}
+		if (pelota.getPosicionX() < 400 && pelota.getPosicionY() >= 420) {
+			pelota.setVelocidadX(pelota.getVelocidadX()+3);
+			pelota.setVelocidadY(pelota.getVelocidadY()- 1);
 		} else {
-			pelota.setVelocidadX(5);
+			pelota.setVelocidadX(7);
 		}
 	}
 
@@ -247,24 +250,29 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	public void pelotaBuscaArcoLocal() {
 		rolando.setPosicionX(rolando.getPosicionX() + 30);
 		sonidos.tocarSonido("disparo");
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 500) {
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 500) {
 			pelota.setVelocidadY(+1);
-			pelota.setVelocidadX(-5);
+			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() > 420 && pelota.getPosicionX() > 500) {
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 700) {
+			pelota.setVelocidadY(+0.5);
+			pelota.setVelocidadX(-7);
+		}
+		if (pelota.getPosicionY() > 350 && pelota.getPosicionX() > 500) {
 			pelota.setVelocidadY(-1);
-			pelota.setVelocidadX(-5);
+			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 300) {
-			pelota.setVelocidadY(+3);
-			pelota.setVelocidadX(-5);
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 700) {
+			pelota.setVelocidadY(+0.5);
+			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() > 420 && pelota.getPosicionX() > 300) {
-			pelota.setVelocidadY(-3);
-			pelota.setVelocidadX(-5);
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() < 400) {
+			pelota.setVelocidadY(+2);
+			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() < 420 && pelota.getPosicionY() > 270) {
-			pelota.setVelocidadX(-5);
+		if (pelota.getPosicionY() > 350 && pelota.getPosicionX() < 400) {
+			pelota.setVelocidadY(-2);
+			pelota.setVelocidadX(-7);
 		}
 		dominarPelota = true;
 	}
@@ -300,6 +308,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			golesMessa.dibujarse(g);
 			golesRolando.dibujarse(g);
 			reloj.dibujarse(g);
+			nameWinniLeven.dibujarse(g);
 		}
 	}
 
@@ -341,7 +350,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 
 	// metodo para crear la pelota
 	private ElementoBasico createPelota() {
-		return new Pelota(anchoJuego / 2, largoJuego / 2, 0, 0, 20, 20, Color.white);
+		return new Pelota(530, 350 , 0, 0, 20, 20, Color.white);
 	}
 
 	// metodo para que Rolando busque el arco cuando tiene la pelota en su poder
@@ -381,6 +390,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 
 	// metodo para setear las posiciones
 	private void setPosiciones() {
+		createPelota();
 		messa.setPosicionY(274);
 		messa.setPosicionX(150);
 		rolando.setPosicionX(900);
@@ -550,25 +560,35 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	// Metodo para verificar si termino el partido
 	private void verificarFinDeJuego() {
 		if (golesMessa.getGolesAFavor() == 3) {
+			sonidos.tocarSonido("final");
+			esperar(3000);
 			pantallaActual = PANTALLA_GANADOR;
 			sonidos.tocarSonido("muchachos");
 		}
 		if (golesRolando.getGolesEnContra() == 3) {
+			sonidos.tocarSonido("final");
+			esperar(3000);
 			pantallaActual = PANTALLA_PERDEDOR;
 			sonidos.tocarSonido("siu");
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() > golesRolando.getGolesEnContra()) {
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() > golesRolando.getGolesEnContra()) {
+			sonidos.tocarSonido("final");
+			esperar(3000);
 			pantallaActual = PANTALLA_GANADOR;
 			sonidos.tocarSonido("muchachos");
 			
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() < golesRolando.getGolesEnContra()) {
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() < golesRolando.getGolesEnContra()) {
+			sonidos.tocarSonido("final");
+			esperar(3000);
 			pantallaActual = PANTALLA_PERDEDOR;
 			sonidos.tocarSonido("siu");
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() == golesRolando.getGolesEnContra()){
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() == golesRolando.getGolesEnContra()){
+			sonidos.tocarSonido("final");
+			esperar(3000);
 			pantallaActual = PANTALLA_EMPATE;
-			sonidos.tocarSonido("empate2");
+			sonidos.tocarSonido("empate");
 		}
 	}
 }
