@@ -1,7 +1,6 @@
 package juego;
 
 import java.awt.Color;
-import java.awt.Graphics;
 
 public interface Elemento extends Dibujable {
 
