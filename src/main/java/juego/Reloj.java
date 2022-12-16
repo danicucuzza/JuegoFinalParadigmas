@@ -41,6 +41,6 @@ public class Reloj{
 	}
 	
 	public int relojRestart () {
-		return reloj = 10;
+		return reloj = 60;
 	}
 }
