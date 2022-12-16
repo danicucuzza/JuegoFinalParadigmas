@@ -60,7 +60,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 		this.arcoVisitante = new ArcoVisitante (994, 274, 0, 0, 80, 170, Color.black);
 		this.golesMessa = new GolesMessa(25 ,630, new Font("Impact", 8, 20), Color.black, 0);
 		this.golesRolando = new GolesRolando(630, 25, new Font("Impact", 8, 20), Color.black, 0);
-		this.nameWinniLeven = new NameWinniLeven(600,25, new Font("Impact", 8, 30), Color.green, 3);
+		this.nameWinniLeven = new NameWinniLeven(600,25, new Font("Impact", 8, 30), Color.black, 3);
         this.portada = new PantallaImagen(anchoJuego, largoJuego, "imagenes/portada.png");
         this.pantallaGanador = new PantallaImagen(anchoJuego, largoJuego, "imagenes/ganaste2.png");
         this.pantallaGolMessa = new PantallaImagen(anchoJuego, largoJuego, "imagenes/golMessi2.jpg");
@@ -174,24 +174,27 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	// metodo para que el enemigo busque la pelota cuando no la tenga.
 	public void enemigoBuscaPelota() {
 			if (rolando.getPosicionX() < pelota.getPosicionX()) {
-				rolando.setVelocidadX(+0.7);
+				rolando.setVelocidadX(+0.6);
 			}
 			if (rolando.getPosicionX() > pelota.getPosicionX()) {
-				if (rolando.getPosicionX() > 300) {
-					rolando.setVelocidadX(-0.7);
+				if (rolando.getPosicionX() > 400) {
+					rolando.setVelocidadX(-0.6);
 				}
 				if (rolando.getPosicionX() > 500) {
 					rolando.setVelocidadX(rolando.getVelocidadX()*2.0);
 				}
 			}
 			if (rolando.getPosicionY() < pelota.getPosicionY()) {
-				rolando.setVelocidadY(+0.7);
+				rolando.setVelocidadY(+0.6);
 			}
 			if (rolando.getPosicionY() > pelota.getPosicionY()) {
-				rolando.setVelocidadY(-0.7);
+				rolando.setVelocidadY(-0.6);
 			}
 			if (rolando.getPosicionX() > 500) {
 				rolando.setVelocidadY(rolando.getVelocidadY()*2.0);
+			}
+			if (rolando.getPosicionX() < 300) {
+				rolando.setVelocidadX(rolando.getVelocidadX()+2);
 			}
 		}
 	
@@ -247,32 +250,29 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 	public void pelotaBuscaArcoLocal() {
 		rolando.setPosicionX(rolando.getPosicionX() + 30);
 		sonidos.tocarSonido("disparo");
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 500) {
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 500) {
 			pelota.setVelocidadY(+1);
 			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 700) {
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 700) {
 			pelota.setVelocidadY(+0.5);
 			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() > 420 && pelota.getPosicionX() > 500) {
+		if (pelota.getPosicionY() > 350 && pelota.getPosicionX() > 500) {
 			pelota.setVelocidadY(-1);
 			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 700) {
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() > 700) {
 			pelota.setVelocidadY(+0.5);
 			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() < 270 && pelota.getPosicionX() > 300) {
-			pelota.setVelocidadY(+3);
+		if (pelota.getPosicionY() < 350 && pelota.getPosicionX() < 400) {
+			pelota.setVelocidadY(+2);
 			pelota.setVelocidadX(-7);
 		}
-		if (pelota.getPosicionY() > 420 && pelota.getPosicionX() > 300) {
-			pelota.setVelocidadY(-3);
+		if (pelota.getPosicionY() > 350 && pelota.getPosicionX() < 400) {
+			pelota.setVelocidadY(-2);
 			pelota.setVelocidadX(-7);
-		}
-		if (pelota.getPosicionY() < 420 && pelota.getPosicionY() > 270) {
-			pelota.setVelocidadX(-5);
 		}
 		dominarPelota = true;
 	}
@@ -308,6 +308,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			golesMessa.dibujarse(g);
 			golesRolando.dibujarse(g);
 			reloj.dibujarse(g);
+			nameWinniLeven.dibujarse(g);
 		}
 	}
 
@@ -349,7 +350,7 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 
 	// metodo para crear la pelota
 	private ElementoBasico createPelota() {
-		return new Pelota(anchoJuego / 2, largoJuego / 2, 0, 0, 20, 20, Color.white);
+		return new Pelota(530, 350 , 0, 0, 20, 20, Color.white);
 	}
 
 	// metodo para que Rolando busque el arco cuando tiene la pelota en su poder
@@ -570,20 +571,20 @@ public class JuegoWinniLeven extends JPanel implements KeyListener, Runnable {
 			pantallaActual = PANTALLA_PERDEDOR;
 			sonidos.tocarSonido("siu");
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() > golesRolando.getGolesEnContra()) {
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() > golesRolando.getGolesEnContra()) {
 			sonidos.tocarSonido("final");
 			esperar(3000);
 			pantallaActual = PANTALLA_GANADOR;
 			sonidos.tocarSonido("muchachos");
 			
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() < golesRolando.getGolesEnContra()) {
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() < golesRolando.getGolesEnContra()) {
 			sonidos.tocarSonido("final");
 			esperar(3000);
 			pantallaActual = PANTALLA_PERDEDOR;
 			sonidos.tocarSonido("siu");
 		}
-		if (reloj.getReloj() == 0 && golesMessa.getGolesAFavor() == golesRolando.getGolesEnContra()){
+		if (reloj.getReloj() <= 0 && golesMessa.getGolesAFavor() == golesRolando.getGolesEnContra()){
 			sonidos.tocarSonido("final");
 			esperar(3000);
 			pantallaActual = PANTALLA_EMPATE;
