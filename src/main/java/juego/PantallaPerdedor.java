@@ -17,9 +17,9 @@ public class PantallaPerdedor extends PantallaImagen {
     }
 
     private void mostrarMensaje(Graphics g, String mensaje) {
-        g.setColor(Color.blue);
-        g.setFont(new Font("Arial", 8, 30));
-        g.drawString(mensaje, 10, 40);
+        g.setColor(Color.black);
+        g.setFont(new Font("Arial", 24, 60));
+        g.drawString(mensaje, 20, 80);
     }
 
 }

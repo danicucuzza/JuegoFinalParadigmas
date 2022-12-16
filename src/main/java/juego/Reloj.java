@@ -3,11 +3,7 @@ package juego;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import javax.swing.Timer;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-import java.lang.Runnable;
+
 public class Reloj {
 	// Implementacion del puntaje del juego
 
@@ -28,12 +24,4 @@ public class Reloj {
 		g.setFont(font);
 		g.drawString("TIME: " + String.valueOf(tiempo), posicionX = 400, posicionY = 25);
 	}
-	public void startTimer(int delaySeconds) {
-		  Executors.newSingleThreadScheduledExecutor().schedule(runnable,delaySeconds,TimeUnit.SECONDS);
-		}
-	Runnable runnable = new Runnable() {
-		  @Override public void run() {
-		    System.out.println("Hello, world!");
-		  }
-	};
 }
